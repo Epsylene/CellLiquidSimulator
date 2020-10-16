@@ -3,7 +3,7 @@
 
 Drawer::Drawer()
 {
-    window.create({1024, 576}, "Lignes de champ", sf::Style::Titlebar | sf::Style::Close);
+    window.create({1024, 576}, "Cell liquid simulator", sf::Style::Titlebar | sf::Style::Close);
 
     backgroundImg.create(window.getSize().x, window.getSize().y, sf::Color::White);
     backgroundTex.create(window.getSize().x, window.getSize().y);
@@ -18,7 +18,7 @@ void Drawer::update()
             window.close();
     }
 
-    drawGrid(11, sf::Color(200, 200, 200));
+    drawGrid(gridAnchor, sf::Color(200, 200, 200));
 }
 
 void Drawer::render()

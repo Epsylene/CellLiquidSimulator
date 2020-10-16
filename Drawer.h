@@ -14,6 +14,8 @@ class Drawer
         sf::Texture backgroundTex;
         sf::Sprite background;
 
+        int gridAnchor = 10;
+
         void drawGrid(int anchor, sf::Color&& color);
 
     public:
