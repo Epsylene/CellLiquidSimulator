@@ -18,7 +18,7 @@ void Drawer::update()
             window.close();
     }
 
-    drawGrid(10, sf::Color(200, 200, 200));
+    drawGrid(11, sf::Color(200, 200, 200));
 }
 
 void Drawer::render()
@@ -41,20 +41,55 @@ void Drawer::run()
 
 void Drawer::drawGrid(int anchor, sf::Color&& color)
 {
-    for (int x = anchor; x < window.getSize().x; x += anchor)
+    //Draw the grid
+    for (int x = 0; x < window.getSize().x; x += anchor)
     {
-        for (int y = anchor; y < window.getSize().y; y += anchor)
+        for (int y = 0; y < window.getSize().y; y += anchor)
         {
-            for (int i = anchor; i > 0; --i)
+            if(window.getSize().x - x > anchor)
             {
-                backgroundImg.setPixel(x - i, y, color);
-                backgroundImg.setPixel(x, y - i, color);
+                for (int i = 0; i < anchor; ++i)
+                {
+                    backgroundImg.setPixel(x + i, y, color);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < window.getSize().x - x; ++i)
+                {
+                    backgroundImg.setPixel(x + i, y, color);
+                }
+            }
+
+            if(window.getSize().y - y > anchor)
+            {
+                for (int i = 0; i < anchor; ++i)
+                {
+                    backgroundImg.setPixel(x, y + i, color);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < window.getSize().y - y; ++i)
+                {
+                    backgroundImg.setPixel(x, y + i, color);
+                }
             }
         }
     }
 
-    //@TODO: conditional for to fill the background
-    // entirely with the grid
+    //Delete the lines at the borders
+    for (int x = 0; x < window.getSize().x; ++x)
+    {
+        for (int y = 0; y < window.getSize().y; ++y)
+        {
+            if(x == 0 || x == window.getSize().x - 1
+                || y == 0 || y == window.getSize().y - 1)
+            {
+                backgroundImg.setPixel(x, y, sf::Color::White);
+            }
+        }
+    }
 
     backgroundTex.update(backgroundImg);
 }
